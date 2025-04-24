@@ -1,0 +1,18 @@
+name: Sleep and Fail
+description: Sleeps for a given time (in minutes) and exits with failure
+author: 'vtb-wanderers63'
+inputs:
+  duration:
+    description: 'Duration to sleep in minutes'
+    required: false
+    default: '3'
+
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        echo "Sleeping for ${{ inputs.duration }} minute(s)..."
+        sleep $((${ { inputs.duration }} * 60))
+        echo "Sleep completed. Exiting with failure status."
+        exit 1
+      shell: bash
